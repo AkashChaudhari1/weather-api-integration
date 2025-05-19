@@ -33,9 +33,9 @@ Make sure you have:
    ```
 2. **Add your OpenWeatherMap API key:**
    Create or edit the file src/main/resources/application.properties and add:
-```bash
-weather.api.key=YOUR_API_KEY_HERE
-```
+   ```bash
+   weather.api.key=YOUR_API_KEY_HERE
+   ```
 Replace YOUR_API_KEY_HERE with your actual API key.
 
 3. **Build and start the application:**
