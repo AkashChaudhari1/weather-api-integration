@@ -28,8 +28,8 @@ Make sure you have:
 1. **Clone this repository:**
 
    ```bash
-   git clone https://github.com/YOUR_USERNAME/REPO_NAME.git
-   cd REPO_NAME
+   git clone https://github.com/AkashChaudhari1/weather-api-integration
+   cd weather-api-integration
    ```
 2. **Add your OpenWeatherMap API key:**
    Create or edit the file src/main/resources/application.properties and add:
