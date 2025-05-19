@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Weather App</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #2193b0, #6dd5ed);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: #fff;
+    }
+
+    .weather-container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      padding: 30px;
+      border-radius: 20px;
+      width: 350px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .weather-container:hover {
+      transform: scale(1.02);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 80%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-bottom: 15px;
+      outline: none;
+    }
+
+    button {
+      background: #ffffff;
+      color: #2193b0;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: #e0f7fa;
+    }
+
+    .result {
+      margin-top: 20px;
+    }
+
+    .weather-info {
+      margin-top: 15px;
+      font-size: 18px;
+    }
+
+    .weather-info i {
+      margin-right: 8px;
+      color: #ffeb3b;
+    }
+
+    .city-title {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="weather-container">
+    <h1><i class="fas fa-cloud-sun"></i> Weather Checker</h1>
+    <input type="text" id="cityInput" placeholder="Enter city name" />
+    <button onclick="fetchWeather()"><i class="fas fa-search-location"></i> Get Weather</button>
+
+    <div class="result" id="result" style="display: none;">
+      <p class="city-title" id="cityName"></p>
+      <div class="weather-info">
+        <p><i class="fas fa-temperature-high"></i> Temperature: <span id="temp"></span> °C</p>
+        <p><i class="fas fa-tint"></i> Humidity: <span id="humidity"></span>%</p>
+        <p><i class="fas fa-smog"></i> Condition: <span id="desc"></span></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function fetchWeather() {
+      const city = document.getElementById('cityInput').value.trim();
+      if (!city) {
+        alert("Please enter a city name.");
+        return;
+      }
+
+      const response = await fetch(`/weather?city=${city}`);
+      if (!response.ok) {
+        alert("City not found or server error.");
+        return;
+      }
+
+      const data = await response.json();
+      document.getElementById("cityName").innerText = data.city;
+      document.getElementById("temp").innerText = data.temperature;
+      document.getElementById("humidity").innerText = data.humidity;
+      document.getElementById("desc").innerText = data.description;
+      document.getElementById("result").style.display = "block";
+    }
+  </script>
+</body>
+</html>
